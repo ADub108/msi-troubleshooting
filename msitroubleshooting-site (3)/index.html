@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Equipment Troubleshooting | Machine Solutions</title>
+<meta name="description" content="Step-by-step troubleshooting guides for Machine Solutions equipment. Install on your phone and use them offline at the machine.">
+<meta name="theme-color" content="#002D72">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" type="image/svg+xml" href="brand/ms-symbol.svg">
+<link rel="icon" type="image/png" href="brand/favicon-64.png">
+<link rel="apple-touch-icon" href="brand/apple-touch-icon.png">
+<style>
+:root{
+  /* Brand Book v1.1: PMS 288 #002D72 · PMS 360 #6CC24A · PMS 2995 #00A8E0 · Cool Gray 11C #53565A · White, plus tints */
+  --navy:#002D72; --green:#6CC24A; --lblue:#00A8E0;
+  --bg:#F2F4F8; --surface:#FFFFFF; --line:#D4D5D6; --ink:#53565A; --ink-2:#53565A; --ink-3:#53565A;
+  --heading:#002D72; --link:#002D72; --hero:#002D72; --hero-ink:#FFFFFF; --hover:#002D72;
+  --display:"Arteria Std Compressed","ArteriaStd-CompressBold","Arial Black","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --body:"Museo Sans","MuseoSans-500",Arial,Helvetica,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#00193F; --surface:#00245B; --line:#406295; --ink:#FFFFFF; --ink-2:#BFCADC; --ink-3:#A9AAAC;
+        --heading:#FFFFFF; --link:#00A8E0; --hero:#002D72; --hover:#00A8E0}
+}
+@font-face{font-family:"Arteria Std Compressed";font-weight:700;font-display:swap;src:url(brand/fonts/ArteriaStd-CompressedBold.woff2) format("woff2")}
+@font-face{font-family:"Museo Sans";font-weight:300;font-display:swap;src:url(brand/fonts/MuseoSans-300.woff2) format("woff2")}
+@font-face{font-family:"Museo Sans";font-weight:500;font-display:swap;src:url(brand/fonts/MuseoSans-500.woff2) format("woff2")}
+@font-face{font-family:"Museo Sans";font-weight:700;font-display:swap;src:url(brand/fonts/MuseoSans-700.woff2) format("woff2")}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-weight:500;line-height:1.55;-webkit-font-smoothing:antialiased;
+  padding-bottom:env(safe-area-inset-bottom,0)}
+a{color:var(--link)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+
+/* brand bar */
+.bar{background:var(--surface);box-shadow:inset 0 -3px 0 var(--green);padding-top:env(safe-area-inset-top,0)}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:14px;padding-bottom:17px}
+.bar img{height:44px;width:auto}
+.bar a.site{font-size:.85rem;text-decoration:none;color:var(--ink-2);white-space:nowrap}
+.bar a.site:hover{color:var(--link)}
+
+/* hero */
+.hero{background:var(--hero);color:var(--hero-ink)}
+.hero .wrap{padding-top:44px;padding-bottom:40px}
+.eyebrow{margin:0 0 10px;font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(2rem,6vw,3rem);line-height:1.05;margin:0 0 14px;letter-spacing:-.005em}
+.hero p{margin:0;max-width:40rem;font-size:1.05rem}
+
+/* cards */
+main .wrap{padding-top:32px;padding-bottom:40px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+@media (max-width:700px){.grid{grid-template-columns:1fr}}
+a.card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:10px;
+  padding:20px 20px 18px;text-decoration:none;color:inherit;transition:border-color .15s,box-shadow .15s,transform .15s}
+a.card:hover,a.card:focus-visible{border-color:var(--hover);box-shadow:0 6px 20px rgba(0,45,114,.12);transform:translateY(-2px);outline:none}
+.logos{display:flex;align-items:center;gap:18px;height:52px;margin-bottom:14px}
+.logos img{height:46px;width:auto}
+.div{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin:0 0 4px}
+.card h2{font-family:var(--body);font-weight:700;font-size:1.35rem;line-height:1.15;margin:0 0 6px;color:var(--heading)}
+.card p{margin:0;color:var(--ink-2);font-size:.95rem}
+.go{margin-top:auto;padding-top:16px;font-weight:700;font-size:.92rem;color:var(--link)}
+.go::after{content:" \2192"}
+
+/* install + help */
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:28px}
+.box{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--green);border-radius:10px;padding:18px 20px}
+.box h3{margin:0 0 6px;font-size:1rem;font-weight:700;color:var(--heading)}
+.box p{margin:0;font-size:.92rem;color:var(--ink-2)}
+.box p+p{margin-top:6px}
+
+footer{border-top:1px solid var(--line)}
+footer .wrap{font-weight:300;display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;padding-top:18px;padding-bottom:28px;font-size:.8rem;color:var(--ink-3)}
+footer a{color:inherit}
+
+img.l{display:block}img.d{display:none}
+@media (prefers-color-scheme:dark){img.l{display:none}img.d{display:block}}
+@media (max-width:560px){.bar img{height:36px}.bar a.site{display:none}.hero .wrap{padding-top:32px;padding-bottom:30px}.logos img{height:34px}}
+</style>
+</head>
+<body>
+
+<header class="bar"><div class="wrap">
+  <a href="./" aria-label="Machine Solutions equipment troubleshooting">
+    <img class="l" src="brand/ms-logo.svg" alt="Machine Solutions — Engineered Excellence">
+    <img class="d" src="brand/ms-logo-reverse.svg" alt="Machine Solutions — Engineered Excellence">
+  </a>
+  <a class="site" href="https://www.machinesolutions.com" rel="noopener">machinesolutions.com</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <p class="eyebrow">Service &amp; support</p>
+  <h1>Equipment troubleshooting</h1>
+  <p>Step-by-step guidance to diagnose and resolve issues on your Machine Solutions equipment, right at the machine. Install any troubleshooter on your phone and it works offline on the shop floor.</p>
+</div></section>
+
+<main><div class="wrap">
+  <div class="grid">
+
+    <a class="card" href="tip-forming/">
+      <div class="logos">
+        <img class="l" src="brand/vante.svg" alt="Vante"><img class="d" src="brand/vante-reverse.svg" alt="Vante">
+        <img class="l" src="brand/plasticweld.svg" alt="PlasticWeld Systems"><img class="d" src="brand/plasticweld-reverse.svg" alt="PlasticWeld Systems">
+      </div>
+      <p class="div">Catheter manufacturing</p>
+      <h2>Tip forming</h2>
+      <p>Diagnose tip-forming defects on Vante and PlasticWeld tipping systems.</p>
+      <span class="go">Start troubleshooting</span>
+    </a>
+
+    <a class="card" href="braiding/">
+      <div class="logos">
+        <img class="l" src="brand/steeger.svg" alt="Steeger USA"><img class="d" src="brand/steeger-reverse.svg" alt="Steeger USA">
+      </div>
+      <p class="div">Braiding &amp; coiling</p>
+      <h2>Braiding</h2>
+      <p>Resolve tension, PPI, and wire-lay issues on Steeger USA vertical and horizontal braiders.</p>
+      <span class="go">Start troubleshooting</span>
+    </a>
+
+    <a class="card" href="bwtec-2711/">
+      <div class="logos">
+        <img class="l" src="brand/bwtec.svg" alt="BW-TEC"><img class="d" src="brand/bwtec-reverse.svg" alt="BW-TEC">
+      </div>
+      <p class="div">Balloon catheter systems</p>
+      <h2>BW-TEC 2711 necker</h2>
+      <p>Work through alarms and process issues on the BW-TEC 2711 automatic necking machine.</p>
+      <span class="go">Start troubleshooting</span>
+    </a>
+
+    <a class="card" href="hblt/">
+      <div class="logos">
+        <img class="l" src="brand/crescent.svg" alt="Crescent Design"><img class="d" src="brand/crescent-reverse.svg" alt="Crescent Design">
+      </div>
+      <p class="div">Testing &amp; quality control</p>
+      <h2>HBLT burst &amp; leak testers</h2>
+      <p>Resolve pressure behavior, test results, and error messages on hydrostatic burst and leak testers.</p>
+      <span class="go">Start troubleshooting</span>
+    </a>
+
+  </div>
+
+  <div class="info">
+    <div class="box">
+      <h3>Install on your phone</h3>
+      <p><b>iPhone / iPad:</b> open a troubleshooter in Safari, tap Share, then Add to Home Screen.</p>
+      <p><b>Android:</b> open a troubleshooter and tap Install.</p>
+    </div>
+    <div class="box">
+      <h3>Need a hand?</h3>
+      <p>If the guided steps don't resolve the issue, our team is ready to help. Each troubleshooter prepares a summary you can share with us.</p>
+      <p>Call <a href="tel:+18008762345">800.876.2345</a> or visit <a href="https://www.machinesolutions.com" rel="noopener">machinesolutions.com</a></p>
+    </div>
+  </div>
+</div></main>
+
+<footer><div class="wrap">
+  <span>&copy; 2026 Machine Solutions &middot; Engineered Excellence</span>
+  <span>Flagstaff, Arizona, USA</span>
+</div></footer>
+
+<script src="assistant/assistant.js" defer></script>
+</body>
+</html>
