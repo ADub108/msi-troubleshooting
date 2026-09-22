@@ -1,0 +1,389 @@
+<title>/*TITLE*/</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F2F4F6; --surface:#FFFFFF; --surface-2:#E8ECEF; --line:#CFD6DC; --line-strong:#9AA6B0;
+  --ink:#1A222B; --ink-2:#4A5762; --ink-3:#6E7B86;
+  --accent:#0E6F73; --accent-ink:#FFFFFF; --accent-soft:#D9EDEE;
+  --warn:#B7791F; --warn-soft:#FBF1DC; --warn-ink:#6B4508;
+  --ok:#2E7D4F; --ok-soft:#DDF0E4; --bad:#B3261E; --bad-soft:#F8E1DF;
+  --shadow:0 1px 2px rgba(20,30,40,.08),0 4px 14px rgba(20,30,40,.06);
+  --r:6px;
+  --display:"IBM Plex Sans Condensed","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11181E; --surface:#1A232B; --surface-2:#232E37; --line:#34414C; --line-strong:#56656F;
+    --ink:#E7ECF0; --ink-2:#B4BFC8; --ink-3:#8593A0;
+    --accent:#4FB3B6; --accent-ink:#0B1A1B; --accent-soft:#163A3C;
+    --warn:#E0A63A; --warn-soft:#3A2D12; --warn-ink:#F3D28A;
+    --ok:#5FBF85; --ok-soft:#16321F; --bad:#E66A61; --bad-soft:#3E1C19;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11181E; --surface:#1A232B; --surface-2:#232E37; --line:#34414C; --line-strong:#56656F;
+  --ink:#E7ECF0; --ink-2:#B4BFC8; --ink-3:#8593A0;
+  --accent:#4FB3B6; --accent-ink:#0B1A1B; --accent-soft:#163A3C;
+  --warn:#E0A63A; --warn-soft:#3A2D12; --warn-ink:#F3D28A;
+  --ok:#5FBF85; --ok-soft:#16321F; --bad:#E66A61; --bad-soft:#3E1C19;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html{font-size:16px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.5;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,select:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;line-height:1.15}
+.mono{font-family:var(--mono)}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.hidden,[hidden]{display:none!important}
+
+/* top bar */
+.top{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.top-in{max-width:1180px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:10px}
+.brand h1{font-size:1.25rem;font-weight:700;letter-spacing:.01em}
+.brand .sub{font-size:.8rem;color:var(--ink-3)}
+.spacer{flex:1}
+.seg{display:inline-flex;border:1px solid var(--line-strong);border-radius:var(--r);overflow:hidden}
+.seg button{background:var(--surface);border:0;padding:6px 12px;font-size:.85rem;color:var(--ink-2)}
+.seg button+button{border-left:1px solid var(--line-strong)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);font-weight:600}
+.seg button:disabled{color:var(--ink-3);cursor:not-allowed;background:var(--surface-2)}
+.seg .tag{font-family:var(--mono);font-size:.62rem;margin-left:6px;opacity:.8}
+.ctl{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--ink-3)}
+
+/* layout */
+.wrap{max-width:1180px;margin:0 auto;padding:22px 20px 60px;display:grid;grid-template-columns:340px 1fr;gap:24px;align-items:start}
+@media (max-width:860px){.wrap{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.picker{position:sticky;top:64px}
+@media (max-width:860px){.picker{position:static}
+ .top-in{padding:8px 14px;gap:8px 12px}.brand h1{font-size:1.05rem}.brand .sub{display:none}.ctl>span{display:none}.seg button{padding:5px 10px;font-size:.8rem}.card-h h2{font-size:1.25rem}.cause{font-size:1.3rem}.card-h,.card-b{padding-left:16px;padding-right:16px}
+ body.has-defect .picker header,body.has-defect .picker .group{display:none}
+ .pcompact{display:none}body.has-defect .pcompact{display:flex;align-items:center;gap:10px;padding:10px 14px;font-size:.9rem}
+ .pcompact .eyebrow{display:block}.pcompact>div{flex:1;min-width:0}.pcompact b{display:block;font-family:var(--display);font-size:1rem;line-height:1.2}}
+@media (min-width:861px){.pcompact{display:none}}
+.picker header{padding:14px 16px 10px;border-bottom:1px solid var(--line)}
+.picker header h2{font-size:1.05rem}
+.picker header p{margin:4px 0 0;font-size:.82rem;color:var(--ink-2)}
+.group{padding:8px 8px 4px}
+.group .eyebrow{padding:8px 8px 4px}
+.defect{display:flex;width:100%;text-align:left;background:none;border:0;border-radius:4px;padding:8px 10px;gap:10px;align-items:flex-start;font-size:.92rem;line-height:1.35}
+.defect:hover{background:var(--surface-2)}
+.defect[aria-current="true"]{background:var(--accent-soft);color:var(--ink);font-weight:600}
+.defect .n{font-family:var(--mono);font-size:.7rem;color:var(--ink-3);min-width:2.6em;padding-top:3px;text-align:right}
+.defect[aria-current="true"] .n{color:var(--accent)}
+.defect span:last-child::first-letter,.card-h h2::first-letter,details.d summary::first-letter{text-transform:uppercase}
+.defect span:last-child{display:inline-block}
+
+/* main */
+.main{display:grid;gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
+.card-h{padding:16px 22px 12px;border-bottom:1px solid var(--line);display:flex;gap:16px;align-items:flex-start}
+.card-h>div:first-child{flex:1;min-width:0}
+.svc ul{margin:8px 0 0;padding-left:1.2em}.svc li{margin:3px 0}
+.card-h h2{font-size:1.55rem;font-weight:700}
+.card-h .meta{font-size:.82rem;color:var(--ink-2);margin-top:4px}
+.card-b{padding:18px 22px}
+.intro{max-width:62ch;color:var(--ink-2)}
+.intro h2{color:var(--ink);font-size:1.6rem;margin-bottom:8px}
+.intro ol{padding-left:1.2em;margin:10px 0}
+.intro li{margin:4px 0}
+
+/* progress rail */
+.rail{display:flex;gap:4px;padding:12px 22px 0;flex-wrap:wrap}
+.rail span{height:6px;flex:1 1 20px;min-width:14px;border-radius:3px;background:var(--surface-2);border:1px solid var(--line)}
+.rail span.done-no{background:var(--line-strong);border-color:var(--line-strong)}
+.rail span.done-skip{background:repeating-linear-gradient(45deg,var(--line-strong) 0 3px,transparent 3px 6px)}
+.rail span.done-yes{background:var(--ok);border-color:var(--ok)}
+.rail span.cur{background:var(--accent);border-color:var(--accent)}
+
+.step-label{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.step-label .eyebrow{color:var(--accent)}
+.cause{font-family:var(--display);font-size:1.6rem;font-weight:600;margin:6px 0 14px}
+.cause::first-letter{text-transform:uppercase}
+.caution{border-left:4px solid var(--warn);background:var(--warn-soft);color:var(--warn-ink);padding:10px 14px;border-radius:0 var(--r) var(--r) 0;margin:0 0 10px;font-size:.92rem;display:flex;gap:10px}
+.caution b{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;padding-top:3px}
+.steps{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.steps li{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.steps .k{font-family:var(--display);font-weight:700;font-size:1.25rem;color:var(--accent);line-height:1.1}
+.steps .code{font-family:var(--mono);font-size:.7rem;color:var(--ink-3);display:block;margin-top:4px}
+.steps p{margin:0}
+.steps p::first-letter{text-transform:uppercase}
+.ask{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.ask h3{font-size:1.05rem;margin-bottom:10px}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn{border:1px solid var(--line-strong);background:var(--surface);border-radius:var(--r);padding:9px 16px;font-weight:600;font-size:.92rem}
+.btn:hover{background:var(--surface-2)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.ok{border-color:var(--ok);color:var(--ok)}
+.btn.ok:hover{background:var(--ok-soft)}
+.btn.quiet{border-color:transparent;color:var(--ink-2)}
+.btn.small{padding:5px 10px;font-size:.8rem;font-weight:500}
+
+/* outcome */
+.outcome{padding:22px}
+.outcome h2{font-size:1.5rem;margin-bottom:6px}
+.outcome.good{border-top:4px solid var(--ok)}
+.outcome.escalate{border-top:4px solid var(--warn)}
+.log{list-style:none;margin:14px 0;padding:0;display:grid;gap:6px;font-size:.9rem}
+.log li{display:grid;grid-template-columns:78px 1fr;gap:10px;align-items:baseline}
+.pill{display:inline-block;font-family:var(--mono);font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:3px;border:1px solid}
+.pill.yes{color:var(--ok);border-color:var(--ok);background:var(--ok-soft)}
+.pill.no{color:var(--ink-2);border-color:var(--line-strong);background:var(--surface-2)}
+.pill.skip{color:var(--ink-3);border-color:var(--line);background:transparent}
+.summary{margin-top:14px}
+.summary textarea{width:100%;min-height:150px;font-family:var(--mono);font-size:.8rem;border:1px solid var(--line);border-radius:var(--r);padding:10px;background:var(--surface-2);color:var(--ink);resize:vertical}
+.support{margin-top:14px;padding:12px 14px;background:var(--surface-2);border-radius:var(--r);font-size:.9rem}
+.support b{font-family:var(--display)}
+
+/* reference */
+.ref .card-b{padding:0}
+details.d{border-top:1px solid var(--line)}
+details.d:first-of-type{border-top:0}
+details.d summary{list-style:none;cursor:pointer;padding:12px 22px;display:flex;gap:12px;align-items:baseline;font-family:var(--display);font-size:1.1rem;font-weight:600}
+details.d summary::-webkit-details-marker{display:none}
+details.d summary::before{content:"+";font-family:var(--mono);color:var(--accent);width:1em}
+details.d[open] summary::before{content:"–"}
+details.d summary .sec{font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:400;margin-left:auto}
+.tblwrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.88rem}
+th,td{text-align:left;vertical-align:top;padding:8px 12px;border-top:1px solid var(--line)}
+th{font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:500;background:var(--surface-2)}
+td:first-child{width:24%;font-weight:600}
+td:first-child::first-letter,td ul li::first-letter{text-transform:uppercase}
+td ul{margin:0;padding-left:1.1em}
+td ul li{margin:2px 0}
+td .c{font-family:var(--mono);font-size:.7rem;color:var(--ink-3);margin-right:6px}
+.gloss{padding:14px 22px;display:grid;gap:6px;font-size:.88rem}
+.gloss div{display:grid;grid-template-columns:minmax(44px,max-content) 1fr;gap:10px}
+.gloss b{font-family:var(--mono);color:var(--accent);font-weight:500}
+.refbtn{margin-left:auto}
+.int{border-left:3px solid var(--line-strong);padding:6px 10px;margin-top:10px;font-size:.82rem;color:var(--ink-2);background:var(--surface-2);border-radius:0 4px 4px 0}
+.int .eyebrow{display:block;margin-bottom:2px}
+.note{font-size:.9rem;color:var(--ink-2);font-style:italic;margin:-6px 0 12px;max-width:70ch}
+.svc{border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:0 var(--r) var(--r) 0;padding:12px 14px;background:var(--accent-soft);font-size:.92rem;margin-top:10px}
+.svc b{font-family:var(--display)}
+.lvl{display:inline-block;font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;padding:1px 6px;border-radius:3px;border:1px solid var(--line-strong);color:var(--ink-3);vertical-align:middle;margin-left:6px}
+figure.ph{margin:0 0 14px;max-width:520px}figure.ph img{max-width:100%;max-height:380px;width:auto;height:auto;border-radius:var(--r);border:1px solid var(--line);display:block}figure.ph figcaption{font-size:.78rem;color:var(--ink-3);margin-top:5px}
+.phrow{display:flex;gap:14px;flex-wrap:wrap}.phrow figure.ph{flex:1 1 240px;max-width:420px}
+.desc{max-width:70ch;color:var(--ink-2);margin:0 0 14px}
+.steps figure.ph{margin:10px 0 0;max-width:380px}
+.gl{padding:12px 22px 18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}.gl .g{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--surface)}.gl .g img{width:100%;aspect-ratio:5/4;object-fit:cover;display:block;border-bottom:1px solid var(--line)}.gl .g div{padding:10px 12px;font-size:.85rem;color:var(--ink-2)}.gl .g b{display:block;font-family:var(--display);font-size:1rem;color:var(--ink);margin-bottom:3px}
+.gl-h{padding:14px 22px 0}
+mark.rv{background:#FFE58A;color:inherit;padding:0 2px;border-radius:2px;border-bottom:2px dotted #B7791F;cursor:help}
+:root[data-theme="dark"] mark.rv{background:#5A4A12}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) mark.rv{background:#5A4A12}}
+.rvlist{padding:12px 22px 18px;display:grid;gap:8px;font-size:.88rem}.rvlist div{display:grid;grid-template-columns:minmax(120px,max-content) 1fr;gap:12px}.rvlist b{font-family:var(--mono);font-weight:500}.rvlist .en{color:var(--ink-3);font-family:var(--mono);font-size:.75rem}
+.models{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:14px 0}
+.mbtn{border:1px solid var(--line-strong);background:var(--surface);border-radius:var(--r);padding:12px 14px;text-align:left;display:grid;gap:3px}
+.mbtn:hover{background:var(--surface-2)}.mbtn b{font-family:var(--display);font-size:1.05rem}.mbtn span{font-size:.8rem;color:var(--ink-3)}
+.mchip{display:inline-flex;align-items:center;gap:8px;font-size:.8rem;color:var(--ink-2);background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:3px 6px 3px 10px}
+.mchip b{color:var(--ink)}.mchip button{border:0;background:var(--surface);border-radius:999px;padding:2px 8px;font-size:.75rem;color:var(--accent);font-weight:600}
+.hmi{display:flex;gap:10px;align-items:flex-start;margin:10px 0 0;padding:8px 12px;border:1px dashed var(--line-strong);border-radius:var(--r);font-size:.85rem;color:var(--ink-2)}
+.hmi b{font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);white-space:nowrap;padding-top:3px}
+.src{font-family:var(--mono);font-size:.68rem;color:var(--ink-3);margin-top:8px}
+.steps p+p{margin-top:8px}.steps ul{margin:6px 0 0;padding-left:1.2em}.steps li.b{display:list-item;padding:0;border:0;background:none;margin:2px 0}
+.foot{max-width:1180px;margin:0 auto;padding:0 20px 30px;font-size:.78rem;color:var(--ink-3)}
+@media (prefers-reduced-motion:no-preference){.card{animation:in .18s ease-out}@keyframes in{from{opacity:.6;transform:translateY(3px)}to{opacity:1;transform:none}}}
+</style>
+
+<div class="top"><div class="top-in">
+  <div class="brand"><h1 id="appTitle"></h1><span class="sub" id="appOrg"></span></div>
+  <div class="spacer"></div>
+  <div class="ctl" id="lineCtl"><span data-t="Machine line">Machine line</span>
+    <div class="seg" id="lineSeg"></div></div>
+  <div class="ctl"><span data-t="View">View</span>
+    <div class="seg" id="viewSeg">
+      <button data-view="wizard" aria-pressed="true" data-t="Guided fix">Guided fix</button>
+      <button data-view="ref" aria-pressed="false" data-t="Full matrix">Full matrix</button></div></div>
+  <div class="ctl" id="langCtl"><span data-t="Language">Language</span>
+    <div class="seg" id="langSeg"></div></div>
+  <div class="ctl"><span data-t="Mode">Mode</span>
+    <div class="seg" id="modeSeg">
+      <button data-mode="operator" aria-pressed="true" data-t="Operator">Operator</button>
+      <button data-mode="internal" aria-pressed="false" data-t="MSI internal">MSI internal</button></div></div>
+</div></div>
+
+<div class="wrap">
+  <aside class="panel picker" id="picker"></aside>
+  <main class="main" id="main"></main>
+</div>
+<div class="foot" id="foot"></div>
+
+<script>
+const KB = /*KB*/;
+const UI = KB.ui; const IMGS = KB.images||{};
+const LANGS = KB.langs||[{id:"en",label:"English"}]; const TR = KB.tr||{}; const RV = KB.review||[];
+let LANG="en"; try{ const l=localStorage.getItem("tt.lang."+KB.lines[0].id); if(l&&LANGS.some(x=>x.id===l)) LANG=l; }catch(e){}
+const T = s => { if(s==null) return ""; s=String(s); const d=TR[LANG]; return (d&&d[s])||s; };
+const hl = html => { const terms=RV.filter(r=>r.lang===LANG); if(!terms.length) return html; for(const r of terms){ const re=new RegExp("(^|[^\\wäöüÄÖÜßáéíóúñÁÉÍÓÚÑ])("+r.term.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+")(?![\\wäöüÄÖÜßáéíóúñÁÉÍÓÚÑ])","gi"); html=html.replace(re,(m,a,b)=>`${a}<mark class="rv" title="${esc("EN: "+r.en+" — "+r.note)}">${b}</mark>`);} return html; };
+const tx = s => hl(esc(T(s)));
+const fmt = s => { const paras=String(T(s)).split(/\n\s*\n/); return paras.map(p=>{ const lines=p.split("\n"); if(lines.every(l=>/^\s*-\s/.test(l))) return "<ul>"+lines.map(l=>`<li class="b">${hl(esc(l.replace(/^\s*-\s/,"")))}</li>`).join("")+"</ul>"; return "<p>"+hl(esc(p)).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>")+"</p>"; }).join(""); };
+const MODELS = l => l.models||[];
+const modelKey = () => "tt.model."+state.line;
+function getModel(){ try{ const m=localStorage.getItem(modelKey()); if(m&&MODELS(line()).some(x=>x.id===m)) return m; if(m==="all") return "all"; }catch(e){} return null; }
+function setModel(id){ try{ localStorage.setItem(modelKey(),id); }catch(e){} state.model=id; }
+const modelName = () => { const m=MODELS(line()).find(x=>x.id===state.model); return m?m.name:""; };
+const forModel = list => (list||[]).filter(im=>!im.models||!im.models.length||state.model==="all"||im.models.includes(state.model));
+const defectVisible = d => !d.models||!d.models.length||!state.model||state.model==="all"||d.models.includes(state.model);
+const pick = obj => { if(!obj) return null; if(typeof obj==="string") return obj; return obj[state.model]||obj["*"]||null; };
+const SECTIONS_OF = l=>l.sections||KB.sections;
+const fig = (im,cls="ph")=>im&&IMGS[im.id]?`<figure class="${cls}"><img src="${IMGS[im.id]}" alt="${esc(im.caption||"")}" loading="lazy"><figcaption>${esc(im.caption||"")}</figcaption></figure>`:"";
+const code = (p,k)=>UI.codeStyle==="numeric"?p+k:k;
+const svcText = ()=>T(UI.serviceP).replace("{contact}",UI.supportContact);
+const state = {line:KB.lines[0].id, view:"wizard", mode:"operator", defect:null, idx:0, log:[], model:null};
+document.title=UI.title; document.getElementById("appTitle").textContent=UI.title; document.getElementById("appOrg").textContent=UI.org;
+try{ const m=localStorage.getItem("tt.mode."+KB.lines[0].id); if(m) state.mode=m; }catch(e){}
+
+const line = ()=>KB.lines.find(l=>l.id===state.line);
+const defect = ()=>line().defects.find(d=>d.id===state.defect);
+const esc = s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const internal = ()=>state.mode==="internal";
+const $ = id=>document.getElementById(id);
+
+function renderTop(){
+  $("lineCtl").hidden = KB.lines.length<2;
+  $("langCtl").hidden = LANGS.length<2;
+  $("langSeg").innerHTML = LANGS.map(l=>`<button data-lang="${l.id}" aria-pressed="${l.id===LANG}">${esc(l.label)}</button>`).join("");
+  document.documentElement.lang = LANG;
+  document.querySelectorAll("[data-t]").forEach(el=>{ el.textContent = T(el.dataset.t); });
+  document.title = T(UI.title); document.getElementById("appTitle").textContent = T(UI.title);
+  $("lineSeg").innerHTML = KB.lines.map(l=>{
+    const empty = !l.defects.length;
+    return `<button data-line="${l.id}" aria-pressed="${l.id===state.line}" ${empty?"disabled title='Content not yet loaded'":""}>${esc(l.name)}${empty?'<span class="tag">SOON</span>':""}</button>`;
+  }).join("");
+  document.querySelectorAll("#viewSeg button").forEach(b=>b.setAttribute("aria-pressed", b.dataset.view===state.view));
+  document.querySelectorAll("#modeSeg button").forEach(b=>b.setAttribute("aria-pressed", b.dataset.mode===state.mode));
+  $("foot").innerHTML = `${T("Source:")} ${tx(line().source)}. ${internal()?T("Internal mode shows source code references and service-level repair steps."):T("If the guided steps don't resolve the problem, contact")+" "+tx(UI.supportName)+" "+T("with the summary the tool prepares for you.")}`;
+}
+
+function renderPicker(){
+  const L=line(); const SECTIONS=SECTIONS_OF(L);
+  let html = `<header><h2>${tx(UI.pickerTitle)}</h2><p>${tx(UI.pickerHelp)}</p></header>`;
+  let n=0;
+  for(const sec of Object.keys(SECTIONS)){
+    const ds=L.defects.filter(d=>d.section===sec&&defectVisible(d)); if(!ds.length) continue;
+    html += `<div class="group"><div class="eyebrow">${tx(SECTIONS[sec])}</div>`+
+      ds.map(d=>{ n++; return `<button class="defect" data-defect="${d.id}" aria-current="${d.id===state.defect}"><span class="n">${internal()? (sec[0].toUpperCase()+n):"&#9656;"}</span><span>${tx(d.name)}</span></button>`;}).join("")+`</div>`;
+  }
+  if(MODELS(L).length && state.model){ html = html.replace("</header>", `<div style="padding:0 0 10px"><span class="mchip">${T("Model")}: <b>${state.model==="all"?T("All models"):esc(modelName())}</b><button data-act="model">${T("Change")}</button></span></div></header>`); }
+  const cur=L.defects.find(d=>d.id===state.defect);
+  html = (cur?`<div class="pcompact"><div><span class="eyebrow">${T("Problem")}</span><b>${tx(cur.name)}</b></div><button class="btn small" data-act="clear">${T("Change")}</button></div>`:"")+html;
+  $("picker").innerHTML = html;
+  document.body.classList.toggle("has-defect", !!cur && state.view==="wizard");
+}
+
+function renderMain(){
+  if(state.view==="ref") return renderRef();
+  const L0=line();
+  if(MODELS(L0).length && !state.model){
+    $("main").innerHTML = `<section class="card"><div class="card-b intro"><div class="eyebrow">${esc(L0.name)}</div><h2>${tx(L0.modelPrompt||"Which machine are you using?")}</h2><p>${tx(L0.modelHelp||"Pictures, screen paths and alarm lists are shown for the machine you pick. You can change it at any time.")}</p>
+      <div class="models">${MODELS(L0).map(m=>`<button class="mbtn" data-model="${m.id}"><b>${esc(m.name)}</b><span>${esc(m.note||"")}</span></button>`).join("")}<button class="mbtn" data-model="all"><b>${T("Not sure / show all")}</b><span>${T("Shows every problem and every model's pictures")}</span></button></div></div></section>`;
+    return;
+  }
+  const d=defect();
+  if(!d){
+    $("main").innerHTML = `<section class="card"><div class="card-b intro">
+      <div class="eyebrow">${esc(line().name)} · ${tx(UI.introEyebrow)}</div>
+      <h2>${tx(UI.introH2)}</h2>
+      <p>${tx(UI.introP)}</p>
+      <ol>${UI.introTips.map(t=>`<li>${tx(t)}</li>`).join("")}</ol>
+      </div></section>`;
+    return;
+  }
+  const L=line(), n=d.causes.length, SECTIONS=SECTIONS_OF(L), STEP=T(L.stepLabel||"Cause");
+  const rail = `<div class="rail">`+d.causes.map((c,i)=>{const r=state.log[i]; return `<span class="${i===state.idx&&state.idx<n?"cur":r?"done-"+r:""}" title="${esc(c.cause)}"></span>`;}).join("")+`</div>`;
+  const head = `<div class="card-h"><div><div class="eyebrow">${tx(SECTIONS[d.section])}</div><h2>${tx(d.name)}</h2><div class="meta">${n} ${T((L.stepLabel||"Cause")==="Cause"?"potential causes, most likely first":"adjustments, in the order to try them")}</div></div>
+     <button class="btn quiet small refbtn" data-act="restart">${T("Start over")}</button></div>`;
+
+  if(state.idx>=n) return renderOutcome(d, head);
+  const c=d.causes[state.idx];
+  const svc = c.level==="service" && !internal();
+  let j=state.idx; // every cause is its own step (service-level causes show a contact-service card in Operator mode)
+  const span=j-state.idx+1;
+  const cautions = svc?"":c.cautions.map(k=>`<div class="caution"><b>${T("Caution")}${internal()?" "+code("C",k):""}</b><span>${tx(L.cautions[k])}</span></div>`).join("");
+  const stepImgs = forModel(c.images||(c.image?[c.image]:[])).map(im=>fig(im)).join("");
+  const hmiTxt = pick(c.hmi); const hmi = hmiTxt?`<div class="hmi"><b>${esc(state.model&&state.model!=="all"?modelName():T("On the HMI"))}</b><span>${hl(esc(T(hmiTxt)))}</span></div>`:"";
+  const srcTxt = pick(c.source); const src = srcTxt?`<div class="src">${T("Source:")} ${esc(srcTxt)}</div>`:"";
+  const steps = svc?`<div class="svc"><b>${tx(UI.supportName)}${T("item.").startsWith("-")||T("item.").startsWith("—")?T("item."):" "+T("item.")}</b> ${hl(esc(svcText()))}</div>`:`<div class="eyebrow">${tx(L.stepsHeading||"Check and adjust")}</div><ol class="steps">${c.remedies.map((k,i)=>`<li><span class="k">${c.remedies.length>1?i+1:"→"}</span><div>${fmt(L.remedies[k])}${internal()?`<span class="code">Code ${code("D",k)}</span>`:""}</div></li>`).join("")}</ol>${stepImgs?`<div class="phrow" style="margin-top:12px">${stepImgs}</div>`:""}${hmi}${src}`;
+  const note = c.note?`<p class="note">${tx(c.note)}</p>`:"";
+  const intro = state.idx===0&&(d.desc||forModel(d.images).length)?`<p class="desc">${tx(d.desc||"")}</p><div class="phrow">${forModel(d.images).map(im=>fig(im)).join("")}</div>`:"";
+  const intNote = internal()&&c.internal?`<div class="int"><span class="eyebrow">${T("MSI internal note")}</span>${esc(c.internal)}</div>`:"";
+  $("main").innerHTML = `<section class="card">${head}${rail}<div class="card-b">
+    <div class="step-label"><span class="eyebrow">${STEP}${span>1?"s":""} ${state.idx+1}${span>1?"–"+(j+1):""} of ${n}</span><span class="eyebrow" style="color:var(--ink-3)">${internal()?c.remedies.map(k=>code("D",k)).join(", ")+(c.cautions.length?" · "+c.cautions.map(k=>code("C",k)).join(", "):""):""}</span></div>
+    ${intro}<div class="cause">${tx(c.cause)}${c.level==="service"?`<span class="lvl">${T("service")}</span>`:""}</div>
+    ${note}${cautions}
+    ${steps}${intNote}
+    <div class="ask"><h3>${svc?T("Did MSI Service resolve it, or do you want to move on?"):tx(L.askQuestion||UI.askQuestion)}</h3>
+      <div class="btns"><button class="btn ok" data-act="yes" data-span="${span}">${T("Yes, fixed")}</button><button class="btn primary" data-act="no" data-span="${span}">${T((L.stepLabel||"Cause")==="Cause"?"No, next cause":"No, next adjustment")}</button><button class="btn quiet" data-act="skip" data-span="${span}">${T("Not applicable, skip")}</button>${state.idx>0?`<button class="btn quiet" data-act="back">${T("Back")}</button>`:""}</div></div>
+  </div></section>`;
+}
+
+function summaryText(d){
+  const lines=[`MSI ${T(UI.title)} — ${T("support summary")}`,`${T("Machine line:")} ${line().name}`,`${T("Problem:")} ${T(d.name)} (${T(SECTIONS_OF(line())[d.section])})`,`${T("Date:")} ${new Date().toLocaleString()}`,``,T("Steps worked through:")];
+  d.causes.forEach((c,i)=>{const r=state.log[i]; if(!r) return; lines.push(`  ${i+1}. ${T(c.cause)} — ${r==="yes"?T("FIXED"):r==="no"?T("tried, not fixed"):T("skipped / not applicable")}`);});
+  lines.push(``,T(UI.summaryExtra));
+  return lines.join("\n");
+}
+
+function renderOutcome(d, head){
+  const fixedIdx = state.log.indexOf("yes");
+  const logHtml = `<ul class="log">`+d.causes.map((c,i)=>{const r=state.log[i]; if(!r) return ""; return `<li><span class="pill ${r}">${T(r==="yes"?"fixed":r==="no"?"no change":"skipped")}</span><span>${tx(c.cause)}</span></li>`;}).join("")+`</ul>`;
+  const body = fixedIdx>=0
+    ? `<div class="outcome good"><div class="eyebrow">${T("Resolved")}</div><h2>${T("Resolved — cause:")} ${tx(d.causes[fixedIdx].cause)}</h2><p>${tx(UI.resolvedP)} ${T("If the problem returns, start here first.")}</p>${logHtml}</div>`
+    : `<div class="outcome escalate"><div class="eyebrow">${T("Not resolved")}</div><h2>${T("All listed causes tried without resolving the problem")}</h2><p>${tx(UI.escalateP)}</p>${logHtml}
+       <div class="summary"><div class="eyebrow">${T("Support summary (copy and send)")}</div><textarea id="sum" readonly>${esc(summaryText(d))}</textarea><div class="btns" style="margin-top:8px"><button class="btn primary small" data-act="copy">${T("Copy summary")}</button></div></div>
+       <div class="support"><b>${tx(UI.supportName)}</b> — ${UI.supportContact.includes("@")?`<a href="mailto:${esc(UI.supportContact)}?subject=${encodeURIComponent(T(UI.title)+": "+T(d.name))}&body=${encodeURIComponent(summaryText(d))}" style="color:var(--accent)">${esc(UI.supportContact)}</a>`:esc(UI.supportContact)}</div></div>`;
+  $("main").innerHTML = `<section class="card">${head}${body}<div class="card-b" style="border-top:1px solid var(--line)"><div class="btns"><button class="btn" data-act="restart">${T("Troubleshoot this problem again")}</button><button class="btn quiet" data-act="clear">${T("Choose another problem")}</button></div></div></section>`;
+}
+
+function renderRef(){
+  const L=line(); const SECTIONS=SECTIONS_OF(L);
+  const groups = Object.keys(SECTIONS).map(sec=>{
+    const ds=L.defects.filter(d=>d.section===sec&&defectVisible(d)); if(!ds.length) return "";
+    return ds.map(d=>`<details class="d" ${d.id===state.defect?"open":""} id="ref-${d.id}"><summary>${tx(d.name)}<span class="sec">${tx(SECTIONS[sec])}</span></summary>
+      ${d.desc||(d.images||[]).length?`<div class="card-b" style="padding-top:0"><p class="desc">${tx(d.desc||"")}</p><div class="phrow">${forModel(d.images).map(im=>fig(im)).join("")}</div></div>`:""}<div class="tblwrap"><table><thead><tr><th>${T(L.stepLabel||"Potential cause")}</th><th>${T(L.stepLabel?"What to do and why":"Remedy")}</th><th>${T("Cautions")}</th></tr></thead><tbody>`+
+      d.causes.map(c=>{const svc=c.level==="service"&&!internal(); return `<tr><td>${tx(c.cause)}${c.level==="service"?`<span class="lvl">${T("service")}</span>`:""}${c.note?`<div style="font-weight:400;font-style:italic;color:var(--ink-3);font-size:.8rem;margin-top:4px">${tx(c.note)}</div>`:""}</td><td>${svc?`<span style="color:var(--ink-2)">${tx(UI.supportName)} — ${hl(esc(svcText()))}</span>`:`<ul>${c.remedies.map(k=>`<li>${internal()?`<span class="c">${code("D",k)}</span>`:""}${tx(L.remedies[k])}</li>`).join("")}</ul>${pick(c.hmi)?`<div class="hmi"><b>${esc(state.model&&state.model!=="all"?modelName():T("On the HMI"))}</b><span>${hl(esc(T(pick(c.hmi))))}</span></div>`:""}${forModel(c.images).length?`<div class="phrow" style="margin-top:8px">${forModel(c.images).map(im=>fig(im)).join("")}</div>`:""}${pick(c.source)?`<div class="src">${T("Source:")} ${esc(pick(c.source))}</div>`:""}`}</td><td>${svc?"":c.cautions.map(k=>`<div style="margin:2px 0">${internal()?`<span class="c">${code("C",k)}</span>`:""}${tx(L.cautions[k])}</div>`).join("")||"<span style='color:var(--ink-3)'>—</span>"}</td></tr>`;}).join("")+
+      `</tbody></table></div><div class="card-b" style="padding-top:8px"><button class="btn small primary" data-goto="${d.id}">${T("Run guided fix for this problem")}</button></div></details>`).join("");
+  }).join("");
+  const rvl = RV.filter(r=>r.lang===LANG); const review = rvl.length?`<details class="d" open><summary>Terminology under review<span class="sec">${esc(LANGS.find(l=>l.id===LANG).label)}</span></summary><div class="rvlist"><div style="color:var(--ink-2);grid-column:1/-1">Highlighted terms are translation judgment calls for MSI's native-speaking team to confirm. Hover a highlight anywhere in the app to see the English term and the alternatives.</div>${rvl.map(r=>`<div><b><mark class="rv">${esc(r.term)}</mark></b><span><span class="en">EN: ${esc(r.en)}</span> — ${esc(r.note)}</span></div>`).join("")}</div></details>`:"";
+  const gl = (L.glossary||[]); const glossary = gl.length?`<details class="d"><summary>${T("Tip types, tooling, parameters and materials")}<span class="sec">${T("glossary")}</span></summary>${[...new Set(gl.map(g=>g.group))].map(grp=>`<div class="gl-h eyebrow">${esc(grp)}</div><div class="gl">${gl.filter(g=>g.group===grp).map(g=>`<div class="g">${g.image&&IMGS[g.image]?`<img src="${IMGS[g.image]}" alt="${esc(g.term)}" loading="lazy">`:""}<div><b>${tx(g.term)}</b>${tx(g.text)}</div></div>`).join("")}</div>`).join("")}</details>`:"";
+  const gloss = internal()?`<details class="d"><summary>${T("Code glossary")}<span class="sec">${T("internal")}</span></summary><div class="gloss"><div class="eyebrow" style="grid-column:1/-1">${T("Diagnostic codes")}</div>${Object.entries(L.remedies).map(([k,v])=>`<div><b>${code("D",k)}</b><span>${tx(v)}</span></div>`).join("")}<div class="eyebrow" style="grid-column:1/-1;margin-top:10px">${T("Caution codes")}</div>${Object.entries(L.cautions).map(([k,v])=>`<div><b>${code("C",k)}</b><span>${tx(v)}</span></div>`).join("")}</div></details>`:"";
+  $("main").innerHTML = `<section class="card ref"><div class="card-h"><div><div class="eyebrow">${esc(L.name)} · ${T("reference")}</div><h2>${tx(UI.refTitle)}</h2><div class="meta">${L.defects.length} ${T("problem descriptions")} · ${L.defects.reduce((a,d)=>a+d.causes.length,0)} ${T(L.stepLabel?"adjustments":"cause/remedy pairs")} · ${tx(L.source)}</div></div></div><div class="card-b">${groups}${glossary}${gloss}${review}</div></section>`;
+  if(state.defect){const el=$("ref-"+state.defect); if(el) el.scrollIntoView({block:"start",behavior:"smooth"});}
+}
+
+function render(){ renderTop(); renderPicker(); renderMain(); location.hash = state.defect?`${state.line}/${state.defect}`:state.line; }
+function choose(id){ state.defect=id; state.idx=0; state.log=[]; if(state.view==="ref") state.view="wizard"; render(); toMain(); }
+function toMain(){ if(window.innerWidth<=860){ const m=$("main"); const y=m.getBoundingClientRect().top+window.scrollY-(document.querySelector(".top").offsetHeight+10); window.scrollTo({top:Math.max(0,y),behavior:"smooth"}); } else window.scrollTo({top:0,behavior:"smooth"}); }
+
+document.addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  if(b.dataset.line){ state.line=b.dataset.line; state.defect=null; state.idx=0; state.log=[]; state.model=getModel(); render(); }
+  else if(b.dataset.model){ setModel(b.dataset.model); render(); }
+  else if(b.dataset.act==="model"){ state.model=null; state.defect=null; render(); return; }
+  else if(b.dataset.lang){ LANG=b.dataset.lang; try{localStorage.setItem("tt.lang."+KB.lines[0].id,LANG)}catch(x){} render(); }
+  else if(b.dataset.view){ state.view=b.dataset.view; render(); }
+  else if(b.dataset.mode){ state.mode=b.dataset.mode; try{localStorage.setItem("tt.mode."+KB.lines[0].id,state.mode)}catch(x){} render(); }
+  else if(b.dataset.defect){ choose(b.dataset.defect); }
+  else if(b.dataset.goto){ choose(b.dataset.goto); }
+  else if(b.dataset.act){
+    const a=b.dataset.act;
+    if(a==="yes"||a==="no"||a==="skip"){ const sp=+(b.dataset.span||1); for(let q=0;q<sp;q++) state.log[state.idx+q]=a; state.idx = a==="yes"?defect().causes.length:state.idx+sp; renderMain(); toMain(); }
+    else if(a==="back"){ state.idx=Math.max(0,state.idx-1); state.log.length=state.idx; renderMain(); }
+    else if(a==="restart"){ state.idx=0; state.log=[]; renderMain(); }
+    else if(a==="clear"){ state.defect=null; state.idx=0; state.log=[]; render(); }
+    else if(a==="copy"){ const t=$("sum"); t.select(); try{ navigator.clipboard.writeText(t.value); b.textContent=T("Copied"); setTimeout(()=>b.textContent=T("Copy summary"),1500);}catch(x){ document.execCommand("copy"); } }
+  }
+});
+
+// deep link: #plasticweld/defect-id
+state.model=getModel();
+(function(){ const h=location.hash.replace("#","").split("/"); if(h[0]&&KB.lines.some(l=>l.id===h[0]&&l.defects.length)) state.line=h[0]; if(h[1]&&line().defects.some(d=>d.id===h[1])) state.defect=h[1]; state.model=getModel(); })();
+render();
+</script>
