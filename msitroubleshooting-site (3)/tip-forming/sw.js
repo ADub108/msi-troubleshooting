@@ -1,8 +1,8 @@
 // Troubleshooter service worker — cache the whole app so it works offline; refresh from the network when online.
-const CACHE = 'ts-a45a3db647';
+const CACHE = 'ts-1898878764';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting())); });
-self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
+self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(ks => { const had = ks.some(k => k.startsWith('ts-') && k !== CACHE); return Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k))).then(() => self.clients.claim()).then(() => self.clients.matchAll({type:'window'})).then(cs => { if (had) cs.forEach(c => c.postMessage({type:'updated', version:'1898878764'})); }); })); });
 self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
   if (url.origin !== location.origin) return;            // fonts etc. go straight to the network
